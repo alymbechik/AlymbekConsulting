@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.info-table ul li{
+    display: flex !important;
+    align-items:center !important;
+    justify-content: space-between;
+}
+footer, .section{
+    margin: 0;
+}
+</style>
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <span class="breadcrumb"><a href="#">{{ villa.category }}</a>  /  {{ villa.address }}</span>
+          <h3>{{ villa.address }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section best-deal">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="section-heading">
+            <h6>| Best Deal</h6>
+            <h2>{{ villa.address }}</h2>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="tabs-content">
+            <div class="row">
+              <div class="nav-wrapper ">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="openModalBtn">Изменить</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a href="{% url 'delete' villa.id %}"><button class="nav-link active">Удалить</button></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="appartment" role="tabpanel" aria-labelledby="appartment-tab">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="info-table">
+                        <ul>
+                          <li>Площадь <span>{{ villa.area }} m2</span></li>
+                          <li>Кол-во этажей <span>{{ villa.floor }}</span></li>
+                          <li>Кол-во комнат <span>{{ villa.room_count }}</span></li>
+                          <li>Кол-во спален <span>{{ villa.bedroom }}</span></li>
+                          <li>Кол-во санузлов <span>{{ villa.bathroom }}</span></li>
+                          <li>Кол-во парковочных мест <span>{{ villa.parking }}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <img src="{{ villa.logo.url }}" alt="">
+                    </div>
+                    <div class="col-lg-3">
+                      <h4>Тип: </h4>
+                      <p>{{ villa.category }}</p>
+                      <h4>Информация</h4>
+                      <p>{{ villa.description }}</p>
+                      <div class="icon-button">
+                        <a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="villa" role="tabpanel" aria-labelledby="villa-tab">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="info-table">
+                        <ul>
+                          <li>Total Flat Space <span>250 m2</span></li>
+                          <li>Floor number <span>26th</span></li>
+                          <li>Number of rooms <span>5</span></li>
+                          <li>Parking Available <span>Yes</span></li>
+                          <li>Payment Process <span>Bank</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <img src="{% static 'assets/images/deal-02.jpg' %}" alt="">
+                    </div>
+                    <div class="col-lg-3">
+                      <h4>Detail Info About New Villa</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, do eiusmod tempor pack incididunt ut labore et dolore magna aliqua quised ipsum suspendisse. <br><br>Swag fanny pack lyft blog twee. JOMO ethical copper mug, succulents typewriter shaman DIY kitsch twee taiyaki fixie hella venmo after messenger poutine next level humblebrag swag franzen.</p>
+                      <div class="icon-button">
+                        <a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="penthouse" role="tabpanel" aria-labelledby="penthouse-tab">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="info-table">
+                        <ul>
+                          <li>Total Flat Space <span>320 m2</span></li>
+                          <li>Floor number <span>34th</span></li>
+                          <li>Number of rooms <span>6</span></li>
+                          <li>Parking Available <span>Yes</span></li>
+                          <li>Payment Process <span>Bank</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <img src="{% static 'assets/images/deal-03.jpg' %}" alt="">
+                    </div>
+                    <div class="col-lg-3">
+                      <h4>Extra Info About Penthouse</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, do eiusmod tempor pack incididunt ut Kinfolk tonx seitan crucifix 3 wolf moon bicycle rights keffiyeh snackwave wolf same vice, chillwave vexillologistlabore et dolore magna aliqua quised ipsum suspendisse. <br><br>Swag fanny pack lyft blog twee. JOMO ethical copper mug, succulents typewriter shaman DIY kitsch twee taiyaki fixie hella venmo after messenger poutine next level humblebrag swag franzen.</p>
+                      <div class="icon-button">
+                        <a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+    <!-- Modal Structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <center>
+              <h2>Изменения объекта</h2>
+              <form action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Сохранить</button>
+              </form>
+            </center>
+        </div>
+    </div>
+
+
+<script>
+  // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("openModalBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+{% endblock %}

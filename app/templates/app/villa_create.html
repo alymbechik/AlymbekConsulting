@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center>
+    <h2>
+        Создать Объект
+    </h2>
+    <form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Название:</label>
+        <input type="text" name="address"><br><br>
+
+        <label>Категория:</label>
+<!--    теперь понятно    -->
+        <select name="category" required>
+            {% for category in categories %}
+            <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+        </select><br><br>
+<!--    выбор есть    -->
+
+        <label>Описание:</label>
+        <input type="text" name="description"><br><br>
+
+        <label>Картинка:</label>
+        <input type="file" name="logo"><br><br>
+
+        <label>Цена:</label>
+        <input type="number" name="price"><br><br>
+
+        <label>Спальни:</label>
+        <input type="number" name="bedroom"><br><br>
+
+        <label>Ванны, туалеты:</label>
+        <input type="number" name="bathroom"><br><br>
+
+        <label>Этаж:</label>
+        <input type="number" name="floor"><br><br>
+
+        <label>Площадь:</label>
+        <input type="number" name="area"><br><br>
+
+        <label>Парковочные места</label>
+        <input type="number" name="parking"><br><br>
+
+        <label>Комнат:</label>
+        <input type="number" name="room_count"><br><br>
+
+        <button type="submit">Отправить</button>
+    </form>
+</center>
+</body>
+</html>
